@@ -1,4 +1,5 @@
 from django.db import models
+# for database models
 
 
 class Author(models.Model):

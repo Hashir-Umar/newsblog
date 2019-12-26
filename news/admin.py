@@ -5,9 +5,9 @@ from accounts.models import User
 from news.models import Author, Category, Article
 
 
-@admin.register(User)
-class UserAdmin(admin.ModelAdmin):
-    list_display = ('id', 'username', 'email', )
+# @admin.register(User)
+# class UserAdmin(admin.ModelAdmin):
+#     list_display = ('id', 'username', 'email', )
 
 #
 # @admin.register(Category)

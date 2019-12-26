@@ -1,8 +1,8 @@
-from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.utils import timezone
 
 
-class User(AbstractUser):
+class User(models.Model):
     ADMIN = 1
     BLOG_OWNER = 2
     GUEST = 3
@@ -12,11 +12,19 @@ class User(AbstractUser):
         (GUEST, 'guest'),
     )
 
+    first_name = models.CharField(max_length=30, blank=True)
+    last_name = models.CharField(max_length=150, blank=True)
+    email = models.EmailField(null=False, unique=True)
+    password = models.CharField(max_length=50)
+    is_active = models.BooleanField(
+        default=True,
+        help_text=(
+            'Designates whether this user should be treated as active. '
+            'Unselect this instead of deleting accounts.'
+        ),
+    )
+    date_joined = models.DateTimeField(default=timezone.now)
     role = models.IntegerField(choices=ROLE_CHOICES, null=False, default=3)
 
-    # def __str__(self):
-    #     return "Role: " + str(self.ROLE_CHOICES[self.role][1]) + ", Username: " + self.username + ", Email: " + self.email
-
-
     def __str__(self):
-        return str(self.ROLE_CHOICES[self.role][1])
+        return str(self.ROLE_CHOICES[self.role - 1][1])

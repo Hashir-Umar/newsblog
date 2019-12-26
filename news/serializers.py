@@ -6,7 +6,7 @@ from news.models import Author, Article, Category, Tag, Status
 class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author
-        fields = ('user', 'city', 'country', )
+        fields = '__all__'
 
     def validate(self, attrs):
         user = str(attrs.get('user'))

@@ -12,6 +12,6 @@ router.register('status', views.StatusView)
 router.register('tags', views.TagView)
 
 urlpatterns = [
+    path('add', views.go),
     path('', include(router.urls)),
-    # re_path('^(?P<first_name>\w+)$', UserListView.as_view(), name='my-first-user-view'),
 ]

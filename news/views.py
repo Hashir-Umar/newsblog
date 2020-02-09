@@ -1,5 +1,6 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
+import json
 
 # Create your views here.
 from rest_framework import viewsets
@@ -12,6 +13,18 @@ from news.serializers import AuthorSerializer, ArticleSerializer, CategorySerial
 
 def index(request):
     return HttpResponse("Hello, this is index page")
+
+
+def go(request):
+
+    data = {
+            'name': 'Vitor',
+            'location': 'Finland',
+            'is_active': True,
+            'count': 28
+    }
+    dump = json.dumps(data)
+    return HttpResponse(dump, content_type='application/json')
 
 
 class AuthorView(viewsets.ModelViewSet):

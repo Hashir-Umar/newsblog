@@ -12,12 +12,12 @@ class User(models.Model):
         (GUEST, 'guest'),
     )
 
-    first_name = models.CharField(max_length=30, blank=True)
+    first_name = models.CharField(max_length=150, blank=True)
     last_name = models.CharField(max_length=150, blank=True)
     email = models.EmailField(null=False, unique=True)
-    password = models.CharField(max_length=50)
+    password = models.CharField(max_length=255)
     is_active = models.BooleanField(
-        default=True,
+        default=False,
         help_text=(
             'Designates whether this user should be treated as active. '
             'Unselect this instead of deleting accounts.'
@@ -25,6 +25,3 @@ class User(models.Model):
     )
     date_joined = models.DateTimeField(default=timezone.now)
     role = models.IntegerField(choices=ROLE_CHOICES, null=False, default=3)
-
-    def __str__(self):
-        return str(self.ROLE_CHOICES[self.role - 1][1])

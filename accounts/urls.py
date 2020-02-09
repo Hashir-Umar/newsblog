@@ -4,9 +4,11 @@ from rest_framework import routers
 
 from . import views
 
-router = routers.DefaultRouter()
-router.register('user', views.UserView)
-
 urlpatterns = [
-    path('', include(router.urls)),
+    path('BlogLogin', views.BlogLogin, name='blog_login'),
+    path('GuestLogin', views.GuestLogin, name='guest_login'),
+    path('BlogRegister', views.BlogRegister, name='blog_register'),
+    path('GuestRegister', views.GuestRegister, name='guest_register'),
+    path('ActivateUser', views.ActivateUser, name='activate_user'),
+    path('ActivatePost', views.ActivatePost, name='activate_post'),
 ]

@@ -6,6 +6,12 @@ from accounts.models import User
 from news.models import Author, Article, Status
 from accounts.serializers import UserSerializer
 
+def AdminLogin(request):
+    email = request.POST.get("email")
+    password = request.POST.get("password")
+    response = getUserWithRole(email, password, 1)
+    return HttpResponse(response, content_type='application/json')
+
 def BlogLogin(request):
     email = request.POST.get("email")
     password = request.POST.get("password")
@@ -74,7 +80,7 @@ def getUserWithRole(email, password, _role):
             if i.is_active == 0:
                 data = {
                     'success': '0',
-                    'message': 'user is not active'
+                    'message': 'User is not active'
                 }
             else:
                 data = {
@@ -85,12 +91,21 @@ def getUserWithRole(email, password, _role):
                         'last_name': i.last_name,
                         'email': i.email,
                         'date_joined': str(i.date_joined),
-                        'role': i.role,
+                        'role': getUserRoleText(i.role) ,
                         'is_active': i.is_active
                     }
                 }
 
     return json.dumps(data)
+
+def getUserRoleText(role):
+
+    if role == 1:
+        return "Admin"
+    elif role == 2:
+        return "Blog Author"
+
+    return "Guest"
 
 
 def ActivateUser(request):

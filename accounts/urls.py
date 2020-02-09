@@ -5,6 +5,7 @@ from rest_framework import routers
 from . import views
 
 urlpatterns = [
+    path('AdminLogin', views.AdminLogin, name='admin_login'),
     path('BlogLogin', views.BlogLogin, name='blog_login'),
     path('GuestLogin', views.GuestLogin, name='guest_login'),
     path('BlogRegister', views.BlogRegister, name='blog_register'),

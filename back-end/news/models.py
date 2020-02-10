@@ -17,7 +17,7 @@ class Tag(models.Model):
 
 class Article(models.Model):
     title = models.CharField(max_length=100, unique=True)
-    content = models.TextField(db_index=True)
+    content = models.CharField(max_length=4000)
     tags = models.ManyToManyField(Tag)
     categories = models.ManyToManyField(Category)
     author = models.OneToOneField(Author, on_delete=models.CASCADE)

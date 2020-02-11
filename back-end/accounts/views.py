@@ -6,11 +6,13 @@ from accounts.models import User
 from news.models import Author, Article, Status
 from accounts.serializers import UserSerializer
 
+
 def AdminLogin(request):
     email = request.POST.get("email")
     password = request.POST.get("password")
     response = getUserWithRole(email, password, 1)
     return HttpResponse(response, content_type='application/json')
+
 
 def BlogLogin(request):
     email = request.POST.get("email")
@@ -18,27 +20,35 @@ def BlogLogin(request):
     response = getUserWithRole(email, password, 2)
     return HttpResponse(response, content_type='application/json')
 
+
 def GuestLogin(request):
     email = request.POST.get("email")
     password = request.POST.get("password")
     dump = getUserWithRole(email, password, 3)
     return HttpResponse(dump, content_type='application/json')
 
+
 def BlogRegister(request):
     email = request.POST.get("email")
+    print("[INFO]", email)
     password = request.POST.get("password")
+    print("[INFO]", password)
     first_name = request.POST.get("first_name")
+    print("[INFO]", first_name)
     last_name = request.POST.get("last_name")
+    print("[INFO]", last_name)
     dump = createUserWithRole(email, password, first_name, last_name, 2)
     return HttpResponse(dump, content_type='application/json')
+
 
 def GuestRegister(request):
     dump = createUserWithRole(3)
     return HttpResponse(dump, content_type='application/json')
 
+
 def createUserWithRole(_email, _password, _first_name, _last_name, role):
 
-    #email should be unique
+    # email should be unique
     allUsers = User.objects.filter(email=_email)
 
     data = {'success': '0', 'message': 'Failed.'}
@@ -46,13 +56,13 @@ def createUserWithRole(_email, _password, _first_name, _last_name, role):
     if len(allUsers) == 0:
 
         user = User(
-            email = _email,
-            password = _password,
-            first_name = _first_name,
-            last_name = _last_name,
-            is_active = 0,
-            role = 3,
-            date_joined = timezone.now(),
+            email=_email,
+            password=_password,
+            first_name=_first_name,
+            last_name=_last_name,
+            is_active=0,
+            role=3,
+            date_joined=timezone.now(),
         )
 
         user.save()
@@ -65,9 +75,10 @@ def createUserWithRole(_email, _password, _first_name, _last_name, role):
 
     return json.dumps(data)
 
+
 def getUserWithRole(email, password, _role):
 
-    #get all authors
+    # get all authors
     authors = User.objects.filter(role=_role)
 
     data = {
@@ -91,12 +102,13 @@ def getUserWithRole(email, password, _role):
                         'last_name': i.last_name,
                         'email': i.email,
                         'date_joined': str(i.date_joined),
-                        'role': getUserRoleText(i.role) ,
+                        'role': getUserRoleText(i.role),
                         'is_active': i.is_active
                     }
                 }
 
     return json.dumps(data)
+
 
 def getUserRoleText(role):
 
@@ -123,7 +135,8 @@ def ActivateUser(request):
             _user.is_active = 1
             _user.save()
 
-            author = Author(user=_user, city=None, country=None, active_on=timezone.now())
+            author = Author(user=_user, city=None, country=None,
+                            active_on=timezone.now())
             author.save()
 
             data = {'success': '1', 'message': 'Successful.'}
@@ -148,7 +161,7 @@ def ActivatePost(request):
     if(len(isAdmin) == 1):
         _post = Article.objects.get(id=postID)
 
-        _status = Status.objects.get(article = _post)
+        _status = Status.objects.get(article=_post)
 
         if _status.status == "Approved":
             data = {'success': '0', 'message': 'Post is already active.'}
@@ -167,4 +180,3 @@ def ActivatePost(request):
 
     dump = json.dumps(data)
     return HttpResponse(dump, content_type='application/json')
-

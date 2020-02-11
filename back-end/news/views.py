@@ -10,7 +10,6 @@ from accounts.models import User
 from news.models import Author, Article, Category, Tag, Status
 from news.serializers import AuthorSerializer, ArticleSerializer, CategorySerializer, StatusSerializer, TagSerializer
 
-
 def index(request):
     return HttpResponse("Hello, this is index page")
 

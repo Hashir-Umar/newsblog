@@ -29,6 +29,7 @@ def GuestLogin(request):
 
 
 def BlogRegister(request):
+    print(request)
     email = request.POST.get("email")
     print("[INFO]", email)
     password = request.POST.get("password")

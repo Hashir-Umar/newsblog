@@ -2,8 +2,8 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import './styles.css';
-import HeaderComponent from "./header"
-import SignupComponent from "./signup"
+import HeaderComponent from "./components/header"
+import SignupComponent from "./components/signup"
 
 function App() {
   return (

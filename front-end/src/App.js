@@ -1,17 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Fragment} from 'react';
+import SignUpComponent from "./components/signup"
+import LoginComponent from "./components/login";
+import BlogAdminPanel from "./components/blog_management/home";
+import {Route, Switch} from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';
-import HeaderComponent from "./components/header"
-import SignupComponent from "./components/signup"
 
 function App() {
-  return (
-    <div>
-    <HeaderComponent></HeaderComponent><br/>
-    <SignupComponent></SignupComponent>
-    </div>
-  );
+    return (
+        <Switch>
+            <Route path={'/login'} component={LoginComponent}/>
+            <Route path={'/register'} component={SignUpComponent}/>
+            <Route path={'/blog'} component={BlogAdminPanel}/>
+        </Switch>
+    );
 }
 
 export default App;

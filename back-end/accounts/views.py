@@ -47,7 +47,7 @@ def GuestRegister(request):
     return HttpResponse(dump, content_type='application/json')
 
 
-def createUserWithRole(_email, _password, _first_name, _last_name, role):
+def createUserWithRole(_email, _password, _first_name, _last_name, _role):
 
     # email should be unique
     allUsers = User.objects.filter(email=_email)
@@ -62,12 +62,12 @@ def createUserWithRole(_email, _password, _first_name, _last_name, role):
             first_name=_first_name,
             last_name=_last_name,
             is_active=0,
-            role=3,
+            role=_role,
             date_joined=timezone.now(),
         )
 
         user.save()
-        data = {'success': '0', 'message': 'Successful.'}
+        data = {'success': '1', 'message': 'Successful.'}
     else:
         data = {
             'success': '0',
@@ -167,9 +167,11 @@ def ActivatePost(request):
         if _status.status == "Approved":
             data = {'success': '0', 'message': 'Post is already active.'}
         else:
+            _post.published_date = timezone.now()
             _status.status = "Approved"
             _status.action_date = timezone.now()
             _status.description = description
+            _post.save()
             _status.save()
 
             data = {'success': '1', 'message': 'Successful.'}

@@ -6,12 +6,14 @@ from . import views
 
 router = routers.DefaultRouter()
 router.register('authors', views.AuthorView)
-router.register('articles', views.ArticleView)
+router.register('posts', views.ArticleView)
 router.register('categories', views.CategoryView)
 router.register('status', views.StatusView)
 router.register('tags', views.TagView)
 
 urlpatterns = [
-    path('add', views.go),
+    url(r'^BlogManagement/PostList/$', views.ArticleList),
+    url(r'^BlogManagement/CategoryList/$', views.CategoryList),
+    url(r'^BlogManagement/TagList/$', views.TagList),
     path('', include(router.urls)),
 ]

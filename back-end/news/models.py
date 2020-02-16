@@ -11,16 +11,19 @@ class Author(models.Model):
 
 class Category(models.Model):
     title = models.CharField(max_length=100, unique=True)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
 
 class Tag(models.Model):
     title = models.CharField(max_length=100, unique=True)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+
 
 class Article(models.Model):
     title = models.CharField(max_length=100, unique=True)
     content = models.CharField(max_length=4000)
-    tags = models.ManyToManyField(Tag)
-    categories = models.ManyToManyField(Category)
-    author = models.OneToOneField(Author, on_delete=models.CASCADE)
+    tags = models.ManyToManyField(Tag, null=True)
+    categories = models.ManyToManyField(Category, null=True)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
     published_date = models.DateTimeField(null=True)
 
 class Status(models.Model):

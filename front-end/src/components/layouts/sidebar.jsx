@@ -9,6 +9,10 @@ export default class Sidebar extends React.Component {
         super(props);
     }
 
+    logout = () => {
+        localStorage.clear();
+    };
+
     render() {
         return (
             <Navbar
@@ -25,6 +29,7 @@ export default class Sidebar extends React.Component {
                             <Nav.Link key={index} href="#">{nav}</Nav.Link>
                         )}
 
+                        <Nav.Link href="/login" onClick={this.logout}>Logout</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

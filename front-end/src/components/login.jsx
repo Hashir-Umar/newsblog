@@ -14,6 +14,16 @@ class LoginComponent extends React.Component {
             password: '',
             emailError: false,
             passwordError: false,
+        };
+
+    }
+
+    componentDidMount() {
+
+        const user = JSON.parse(localStorage.getItem("Session"));
+        if(user) {
+            if (user.role === "Blog Author")
+                this.props.history.push("blog/");
         }
     }
 
@@ -43,10 +53,7 @@ class LoginComponent extends React.Component {
                 body: parsedData
             }
         ).then((response) => response.json()
-        ).then((jsonR) => {
-                localStorage.setItem("Session", JSON.stringify(jsonR.data));
-                console.log(JSON.parse(localStorage.getItem("Session")));
-            }
+        ).then((jsonR) => {localStorage.setItem("Session", JSON.stringify(jsonR.data)); this.props.history.push("blog/"); console.log(jsonR)}
         ).catch((error) => console.log(error));
     };
 

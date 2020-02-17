@@ -36,14 +36,15 @@ class LoginComponent extends React.Component {
         this.validateAndProceed(formData.email, formData.password);
 
         const parsedData = qs.stringify(formData);
-        console.log("[HERE] form-data", parsedData);
 
         fetch("http://127.0.0.1:8000/accounts/BlogLogin", {
                 method: "POST",
                 headers: {"Accept": "application/json", "Content-Type": "application/x-www-form-urlencoded"},
                 body: parsedData
             }
-        ).then((response) => console.log(response.json())
+        ).then((response) => {return response.json()}
+        ).then((jsonR) => {localStorage.setItem("Session", jsonR.data); console.log(jsonR.data)}
+        ).then((r) => console.log("[RECIEVED]", localStorage.getItem("Session"))
         ).catch((error) => console.log(error));
     };
 

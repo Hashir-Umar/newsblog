@@ -48,11 +48,6 @@ class PostAddEditComponent extends React.Component {
             }
         }
 
-        console.log(title);
-        console.log(content);
-        console.log(catIDs);
-        console.log(tagIDs);
-
         const formData = {
             title: title,
             content: content,

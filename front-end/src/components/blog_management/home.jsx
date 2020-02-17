@@ -6,9 +6,11 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBlog, faPlus, faSearch} from "@fortawesome/free-solid-svg-icons";
 import Button from "react-bootstrap/Button";
 import PostListComponent from "./post/post_list_component";
-import CategoryListComponent from "./category_list_component";
-import TagListComponent from "./tag_list_component";
+import CategoryListComponent from "./category/category_list_component";
+import TagListComponent from "./tag/tag_list_component";
 import PostAddEditComponent from "./post/post_add_edit_component";
+import CategoryAddEditComponent from "./category/category_add_edit_component";
+import TagAddEditComponent from "./tag/tag_add_edit_component";
 
 class BlogAdminPanel extends React.Component {
 
@@ -158,7 +160,9 @@ class BlogAdminPanel extends React.Component {
                                     : sectionIndex === 1 ? <CategoryListComponent categories={this.state.categories}/>
                                     : <TagListComponent tags={this.state.tags}/>
                             ) : (
-                                addMode && sectionIndex === 0 ? <PostAddEditComponent mode="ADD" sectionTitle={this.state.title}/> : 0
+                                addMode && sectionIndex === 0 ? <PostAddEditComponent mode="ADD" sectionTitle={this.state.title}/> :
+                                    addMode && sectionIndex === 1 ? <CategoryAddEditComponent mode="ADD" sectionTitle={this.state.title} /> :
+                                        addMode && sectionIndex === 2 ? <TagAddEditComponent mode="ADD" sectionTitle={this.state.title} /> : ""
                             )}
 
                         </Col>

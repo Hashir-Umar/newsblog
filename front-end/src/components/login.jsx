@@ -42,9 +42,11 @@ class LoginComponent extends React.Component {
                 headers: {"Accept": "application/json", "Content-Type": "application/x-www-form-urlencoded"},
                 body: parsedData
             }
-        ).then((response) => {return response.json()}
-        ).then((jsonR) => {localStorage.setItem("Session", jsonR.data); console.log(jsonR.data)}
-        ).then((r) => console.log("[RECIEVED]", localStorage.getItem("Session"))
+        ).then((response) => response.json()
+        ).then((jsonR) => {
+                localStorage.setItem("Session", JSON.stringify(jsonR.data));
+                console.log(JSON.parse(localStorage.getItem("Session")));
+            }
         ).catch((error) => console.log(error));
     };
 
@@ -55,7 +57,7 @@ class LoginComponent extends React.Component {
             });
         }
 
-        if(!validatePassword((password))) {
+        if (!validatePassword((password))) {
             this.setState({
                 passwordError: true
             });
@@ -73,13 +75,15 @@ class LoginComponent extends React.Component {
                         <h2 className="card-title text-center mb-5">Login</h2>
                         <form onSubmit={this.handleSubmit} method="POST">
                             {emailError ?
-                                <span className="input-error">Email is invalid</span>:<span/>
+                                <span className="input-error">Email is invalid</span> : <span/>
                             }
                             <input type="text" className="input mb-4" placeholder={"Email"} name="email" required/>
                             {passwordError ?
-                                <span className="input-error">Password must be at-least 8 character long</span>:<span/>
+                                <span className="input-error">Password must be at-least 8 character long</span> :
+                                <span/>
                             }
-                            <input type="password" className="input mb-4" placeholder={"Password"} name="password" required/>
+                            <input type="password" className="input mb-4" placeholder={"Password"} name="password"
+                                   required/>
                             <input type="submit" value="Login" className="btn btn-primary btn-block"/>
                         </form>
                         <div className="pt-4 text-center">Dont have an account? <a href="#">Register</a></div>

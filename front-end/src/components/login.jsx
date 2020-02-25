@@ -93,7 +93,7 @@ class LoginComponent extends React.Component {
                                    required/>
                             <input type="submit" value="Login" className="btn btn-primary btn-block"/>
                         </form>
-                        <div className="pt-4 text-center">Dont have an account? <a href="#">Register</a></div>
+                        <div className="pt-4 text-center">Dont have an account? <a href="http://127.0.0.1:3000/register">Register</a></div>
                     </div>
                 </div>
             </Fragment>

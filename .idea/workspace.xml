@@ -3,8 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="24a4d161-a884-4afe-9dc8-4eb6c7ab575d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/components/layouts/sidebar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/layouts/sidebar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/blog/home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/blog/home.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/blog_management/home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/blog_management/home.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end/src/components/login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/login.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/components/signup.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/components/signup.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,10 +29,14 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/front-end/src" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2019.3.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Hashir\Desktop\newsblog\front-end\src" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Hashir\Desktop\newsblog\front-end\src\components\blog_management\tag" />
       <recent name="C:\Users\Hashir\Desktop\newsblog\front-end\src\components\blog_management\category" />
@@ -48,6 +58,7 @@
       <workItem from="1581435965613" duration="20393000" />
       <workItem from="1581775815353" duration="47732000" />
       <workItem from="1581872824780" duration="23703000" />
+      <workItem from="1581918360774" duration="2960000" />
     </task>
     <servers />
   </component>

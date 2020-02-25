@@ -11,6 +11,8 @@ import TagListComponent from "./tag/tag_list_component";
 import PostAddEditComponent from "./post/post_add_edit_component";
 import CategoryAddEditComponent from "./category/category_add_edit_component";
 import TagAddEditComponent from "./tag/tag_add_edit_component";
+import {addPost} from "../../actions";
+import {connect} from "react-redux";
 
 class BlogAdminPanel extends React.Component {
 
@@ -31,11 +33,7 @@ class BlogAdminPanel extends React.Component {
     }
 
     componentDidMount() {
-
-        fetch("http://localhost:8000/news/BlogManagement/PostList/?author_id=1"
-        ).then(response => response.json()
-        ).then(json => this.setState({posts: json.data})
-        ).catch((error) => console.log(error));
+        this.props.getPosts();
     }
 
     changeSection = (sectionIndex) => {
@@ -96,7 +94,7 @@ class BlogAdminPanel extends React.Component {
         const sectionIndex = this.state.sections.findIndex(val => val === this.state.title);
         return (
             <div>
-                <Sidebar navList={["Welcome, Hashir"]}/>
+                <Sidebar navList={["Welcome, User"]}/>
                 <Container>
 
                     <Row>
@@ -140,29 +138,33 @@ class BlogAdminPanel extends React.Component {
 
                         <Col md={9}>
                             {!addMode && !editMode ?
-                            <Card className="d-flex flex-row align-items-center mb-2">
-                                <Col md={3}>
-                                    <Button onClick={() => this.setState({addMode: true})}
-                                            className="btn btn-sm btn-block btn-warning text-light"> <FontAwesomeIcon
-                                        icon={faPlus}/> Add new {this.state.title}</Button>
-                                </Col>
-                                <Col md={9} className="py-2">
-                                    <form className="form-inline float-right">
-                                        <input className="form-control form-control-sm" type="text" name="name"/>
-                                        <Button className="btn btn-sm btn-primary text-light ml-2"> <FontAwesomeIcon
-                                            icon={faSearch}/> Search {this.state.title}</Button>
-                                    </form>
-                                </Col>
-                            </Card>
-                            : ""}
+                                <Card className="d-flex flex-row align-items-center mb-2">
+                                    <Col md={3}>
+                                        <Button onClick={() => this.setState({addMode: true})}
+                                                className="btn btn-sm btn-block btn-warning text-light">
+                                            <FontAwesomeIcon
+                                                icon={faPlus}/> Add new {this.state.title}</Button>
+                                    </Col>
+                                    <Col md={9} className="py-2">
+                                        <form className="form-inline float-right">
+                                            <input className="form-control form-control-sm" type="text" name="name"/>
+                                            <Button className="btn btn-sm btn-primary text-light ml-2"> <FontAwesomeIcon
+                                                icon={faSearch}/> Search {this.state.title}</Button>
+                                        </form>
+                                    </Col>
+                                </Card>
+                                : ""}
                             {!addMode && !editMode ? (
                                 sectionIndex === 0 ? <PostListComponent posts={this.state.posts}/>
                                     : sectionIndex === 1 ? <CategoryListComponent categories={this.state.categories}/>
                                     : <TagListComponent tags={this.state.tags}/>
                             ) : (
-                                addMode && sectionIndex === 0 ? <PostAddEditComponent mode="ADD" sectionTitle={this.state.title}/> :
-                                    addMode && sectionIndex === 1 ? <CategoryAddEditComponent mode="ADD" sectionTitle={this.state.title} /> :
-                                        addMode && sectionIndex === 2 ? <TagAddEditComponent mode="ADD" sectionTitle={this.state.title} /> : ""
+                                addMode && sectionIndex === 0 ?
+                                    <PostAddEditComponent mode="ADD" sectionTitle={this.state.title}/> :
+                                    addMode && sectionIndex === 1 ?
+                                        <CategoryAddEditComponent mode="ADD" sectionTitle={this.state.title}/> :
+                                        addMode && sectionIndex === 2 ?
+                                            <TagAddEditComponent mode="ADD" sectionTitle={this.state.title}/> : ""
                             )}
 
                         </Col>
@@ -174,4 +176,18 @@ class BlogAdminPanel extends React.Component {
     }
 }
 
-export default (BlogAdminPanel);
+const mapStateToProps = (state) => ({
+    posts: state.posts
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    getPosts: () => {
+        fetch("http://localhost:8000/news/BlogManagement/PostList/?author_id=1"
+        ).then(response => response.json()
+        ).then(json => this.setState({posts: json.data})
+        ).then(json => dispatch(addPost(json))
+        ).catch((error) => console.log(error));
+    }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(BlogAdminPanel);
